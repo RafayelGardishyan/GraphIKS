@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.BoxBlur?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="80.0" prefWidth="506.0" style="-fx-border-width: 5px;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label fx:id="project_title" layoutX="21.0" layoutY="25.0" text="Project Title">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+      <Button fx:id="project_open_button" layoutX="349.0" layoutY="20.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="148.0" style="-fx-background-color: #ffaa77;" text="Open" textFill="WHITE" />
+      <Label fx:id="project_lastopened" layoutX="204.0" layoutY="31.0" text="Last opened: 0-0-0000" />
+      <Line endX="100.0" layoutX="254.0" layoutY="78.0" scaleX="2.4" startX="-100.0" stroke="#9c9c9c" strokeWidth="5.0">
+         <effect>
+            <BoxBlur />
+         </effect>
+      </Line>
+   </children>
+</AnchorPane>
