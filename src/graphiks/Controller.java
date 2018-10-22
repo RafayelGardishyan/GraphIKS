@@ -1,19 +1,21 @@
 package graphiks;
 
-import java.io.IOException;
-import java.net.URL;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.ResourceBundle;
-
 import graphiks.database.db;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+
+import java.io.IOException;
+import java.net.URL;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Optional;
+import java.util.ResourceBundle;
 
 public class Controller {
 
@@ -36,13 +38,33 @@ public class Controller {
 
     @FXML
     void initialize() throws IOException, SQLException, ClassNotFoundException {
-        //Testing database
+        //Set new_button action to create a new project
+        new_button.setOnAction(event -> {
+            TextInputDialog dialog = new TextInputDialog("");
+            dialog.setTitle("Create a new project");
+            dialog.setHeaderText("New project creation");
+            dialog.setContentText("Please enter new project name:");
+
+            // Traditional way to get the response value.
+            Optional<String> result = dialog.showAndWait();
+            result.ifPresent(s -> {
+                try {
+                    db.Conn();
+                    db.WriteDB(s, Date.now(), "[]");
+                    db.CloseDB();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            });
+
+        });
+
+        //Getting projects from database
         graphiks.database.db.Conn();
         ArrayList<ProjectData> projects = db.ReadDB();
         graphiks.database.db.CloseDB();
 
-        for (int i=0; i<projects.size(); i++){
-            ProjectData project = projects.get(i);
+        for (ProjectData project : projects) {
             open_project_fxml(project_filename, project.getM_name(), project.getM_lastopened());
         }
     }

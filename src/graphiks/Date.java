@@ -1,5 +1,7 @@
 package graphiks;
 
+import java.time.LocalDate;
+
 public class Date {
     private int m_day;
     private int m_month;
@@ -7,7 +9,7 @@ public class Date {
     private boolean space_day;
     private boolean space_month;
 
-    public Date(int day, int month, int year){
+    private Date(int day, int month, int year) {
         m_day = day;
         m_month = month;
         m_year = year;
@@ -34,20 +36,24 @@ public class Date {
         return Integer.valueOf(getDateStringRaw());
     }
 
+    public static Date now() {
+        return new Date(LocalDate.now().getDayOfMonth(), LocalDate.now().getMonthValue(), LocalDate.now().getYear());
+    }
+
     public static Date decodeInteger(int date){
         String dates = String.valueOf(date);
         String day;
         String month;
 
-        // Check is the day has only one integer
-        if (dates.charAt(0) == 9) {
+        // Check if the day has only one integer
+        if (!String.valueOf(dates.charAt(0)).equals("9")) {
             day = String.valueOf(dates.charAt(0)) + String.valueOf(dates.charAt(1));
         } else{
             day = String.valueOf(dates.charAt(1));
         }
 
-        // Check is the month has only one integer
-        if (dates.charAt(2) == 9) {
+        // Check if the month has only one integer
+        if (!String.valueOf(dates.charAt(2)).equals("9")) {
             month = String.valueOf(dates.charAt(2)) + String.valueOf(dates.charAt(3));
         } else{
             month = String.valueOf(dates.charAt(3));
